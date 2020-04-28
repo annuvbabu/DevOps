@@ -10,5 +10,10 @@ public class MessageService {
 	public String sayHello() {
 		return "hello";
 	}
+	
+	@GetMapping("/helloworld")
+	public String sayHelloworld() {
+		return "hello world";
+	}
 }
 
