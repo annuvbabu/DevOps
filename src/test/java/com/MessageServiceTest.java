@@ -23,14 +23,14 @@ public class MessageServiceTest {
 	public void testMessage1() {
 		MessageService ms = new MessageService();
 		//System.out.println("hello");
-		Assertions.assertEquals(ms.sayHello(), "hi");
+		Assertions.assertEquals(ms.sayHi(), "hi");
 	}
 	
 	@Test
 	public void testMessage2() {
 		MessageService ms = new MessageService();
 		//System.out.println("hello");
-		Assertions.assertEquals("hello", ms.sayHello());
+		Assertions.assertEquals("hello engineers", ms.sayHelloengineers());
 	}
 	
 	@Test
@@ -44,7 +44,7 @@ public class MessageServiceTest {
 	public void testMessage4() {
 		MessageService ms = new MessageService();
 		//System.out.println("hello");
-		Assertions.assertEquals(ms.sayHelloworld(), "hello");
+		Assertions.assertEquals("hello world",ms.sayHelloworld());
 	}
 	
 }

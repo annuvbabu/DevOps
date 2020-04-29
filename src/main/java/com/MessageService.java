@@ -15,5 +15,15 @@ public class MessageService {
 	public String sayHelloworld() {
 		return "hello world";
 	}
+	
+	@GetMapping("/helloengineers")
+	public String sayHelloengineers() {
+		return "hello engineers";
+	}
+	
+	@GetMapping("/hi")
+	public String sayHi() {
+		return "hi";
+	}
 }
 

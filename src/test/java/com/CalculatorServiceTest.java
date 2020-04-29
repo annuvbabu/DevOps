@@ -23,14 +23,14 @@ public class CalculatorServiceTest {
 	public void test1() {
 		CalculatorService ms = new CalculatorService();
 		//System.out.println("hello");
-		Assertions.assertEquals(ms.add(10,20), 40);
+		Assertions.assertEquals(ms.add(1,20), 21);
 	}
 	
 	@Test
 	public void test2() {
 		CalculatorService ms = new CalculatorService();
 		//System.out.println("hello");
-		Assertions.assertEquals(100, ms.add(10,20));
+		Assertions.assertEquals(120, ms.add(100,20));
 	}
 	
 	@Test
@@ -44,7 +44,7 @@ public class CalculatorServiceTest {
 	public void test4() {
 		CalculatorService ms = new CalculatorService();
 		//System.out.println("hello");
-		Assertions.assertEquals(ms.multiply(10,20), 100);
+		Assertions.assertEquals(ms.multiply(40,20), 800);
 	}
 	
 }
