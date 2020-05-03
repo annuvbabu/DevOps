@@ -1,0 +1,39 @@
+node{
+    
+    stage('git checkout'){
+        git url: 'https://github.com/annuvbabu/DevOps.git'
+        
+    }
+    stage('clean up'){
+       def mavenHome = tool name: 'maven3', type: 'maven'
+       def mavenCMD = "${mavenHome}/bin/mvn"
+       sh "${mavenCMD} clean"
+    }
+    stage('build, test and package'){
+       def mavenHome = tool name: 'maven3', type: 'maven'
+       def mavenCMD = "${mavenHome}/bin/mvn"
+       sh "${mavenCMD} package"
+    }
+    stage('build docker image'){
+        sh 'docker build -t annuvbabu/cicd:2.0
+        
+    }
+'
+    stage('push docker image'){
+        withCredentials([string(credentialsId: 'dockerHubPwd', variable: 'docker-password')])
+        sh "docker login -u annuvbabu -p ${docker-password}"
+        } .
+        sh 'docker push annuvbabu/cicd:2.0'
+        
+    }
+
+    stage('Deploy container'){
+        sh 'docker pull annuvbabu/cicd:2.0
+        
+    }
+
+    stage('Run container'){
+        sh 'docker run 8888:8887 annuvbabu/cicd:2.0
+        
+    }
+}
