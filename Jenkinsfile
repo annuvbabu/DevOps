@@ -1,6 +1,9 @@
   
 node{
 
+    try
+	{
+
     stage('github checkout'){
 
         git url: 'https://github.com/annuvbabu/DevOps.git'
@@ -25,6 +28,19 @@ node{
        sh "${mavenCMD} package"
 
     }
+
+
+    stage('Sonar check'){
+
+
+           def mavenHome = tool name: 'maven3', type: 'maven'
+
+           def mavenCMD = "${mavenHome}/bin/mvn"
+
+           sh "${mavenCMD} sonar:sonar"
+
+        }
+
     
     stage('Docker Image Build'){
 
@@ -48,10 +64,49 @@ node{
         sh 'docker pull annuvbabu/devopsbootcamp'
 
     }
+
+
+    stage('Deploy to Tomcat'){
+
+
+    sshagent(['tomcatserver']) {
+
+
+    sh 'scp -o StrictHostKeyChecking=no target/*.war root@devopsi:/opt/tomcat/apache-tomcat-9.0.34/webapps'
+
+    }
+      
+    }
+    
     stage('Container execution') {
 
         sh 'docker run -d -p 8891:8891 annuvbabu/devopsbootcamp'
 
     }
+   
+  }
+ catch (e) {
+
+     currentBuild.result = "FAILED"
+
+     triggerEmail()
+
+     throw e
+
+  }
     
 }
+
+def triggerEmail() {
+
+  emailext ( 
+
+      body: 'Your build has failed', 
+
+      to : 'annuvbabu@gmail.com', 
+
+      subject: 'Build-Failure'
+ 
+   )
+
+  }
